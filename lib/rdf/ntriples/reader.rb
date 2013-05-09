@@ -313,7 +313,8 @@ module RDF::NTriples
           when language = match(LANGTAG)
             RDF::Literal.new(literal_str, :language => language)
           when datatype = match(/^(\^\^)/) # FIXME
-            RDF::Literal.new(literal_str, :datatype => read_uriref || fail_object)
+            datatype = @line.strip
+            RDF::Literal.new(literal_str, :datatype => datatype)
           else
             RDF::Literal.new(literal_str) # plain string literal
         end
